@@ -1,7 +1,13 @@
-.login {
+body {
+    margin: 0px;
+    padding: 0px;
+    outline: 0px;
+}
+
+.login, .sign-up {
     margin-top: 75px;
 }
-.login-form {
+.login-form, .sign-up-form {
     border: 1px solid #cccccc;
     padding: 25px;
 }
