@@ -82,7 +82,16 @@ $(document).ready(function () {
         contentType: "application/json",
         data: JSON.stringify(data),
         success: function (suc) {
-          window.location = '/login';
+          if (suc.status === 200) {
+            window.location = '/login';
+          } else {
+            $('.log-error').text('Failed to create account');
+            $('.log-error').show(500, function () {
+              setTimeout(function () {
+                $('.log-error').hide(500);
+              }, 3000);
+            });
+          }
         },
         error: function (xhr) {
           console.log('hello4455')

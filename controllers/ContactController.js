@@ -6,12 +6,6 @@ module.exports = function (app) {
   //var modelContact = contactModel(app);
 
   app.use(sess({secret: '12345'})); // initializing session
-  app.get('/', function (req, res) {
-    if (typeof sess.email == undefined || sess.email == "") {
-      return res.redirect('/login');
-    }
-    res.render('contact/contact-info');
-  });
 
   app.get('/login', function (req, res) {
     if (sess.email !== "") {
@@ -23,6 +17,7 @@ module.exports = function (app) {
   app.post('/login', function (req, res) {
     if (req.body.email === "mhhassan@iquantile.com" && req.body.password === "123") {
       sess.email = "mhhassan@iquantile.com";
+      sess.userId = 1;
       var response = {
         status: 200,
         msg: "valid user"
