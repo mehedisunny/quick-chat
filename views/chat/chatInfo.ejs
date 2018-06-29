@@ -1,0 +1,23 @@
+<% include ../common/header.ejs %>
+
+<div class="container chat">
+    <div class="row">
+        <div class="offset-md-3 col-md-6 chat-box col-xs-12 col-sm-12"  id="chat-text">
+        </div>
+    </div>
+    <div class="row">
+        <div class="offset-md-3 col-md-6 chat-form">
+            <div class="alert alert-danger log-error" role="alert">
+
+            </div>
+            <form action="" method="post" id="chatForm">
+                <div class="form-group">
+                    <textarea class="form-control" name="chatBody" id="chatBody"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<% include ../common/footer.ejs %>

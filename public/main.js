@@ -1,5 +1,26 @@
 $(document).ready(function () {
 
+
+  setInterval(function () {
+    $.ajax({
+      url: '/comments',
+      type: "GET",
+      dataType: 'json',
+      contentType: "application/json",
+      success: function (data) {
+        console.log(data)
+        var text = "";
+        for (var i = 0; i < data.chatBody.length; i++) {
+         text += "<div class=\"alert alert-secondary\" role=\"alert\">"+data.chatBody[i].chat_body+"</div>";
+        }
+        $('#chat-text').html(text);
+      },
+      error: function (xhr) {
+        console.log(xhr)
+      }
+    });
+  }, 2000);
+
   // login form submission
   $('#loginForm').on('submit', function (event) {
     event.preventDefault();
@@ -94,9 +115,56 @@ $(document).ready(function () {
           }
         },
         error: function (xhr) {
-          console.log('hello4455')
+          console.log(xhr)
         }
       });
+    }
+  });
+
+  // chat form submission
+  $('#chatForm').on('submit', function (event) {
+    event.preventDefault();
+
+    var chatForm = $('#chatForm');
+
+    var chatBody = chatForm.find('#chatBody').val();
+
+    var data = {
+      chatBody: chatBody,
+    }
+
+    if (chatBody === "") {
+      $('.log-error').text('Enter your text and hit enter');
+      $('.log-error').show(500, function () {
+        setTimeout(function () {
+          $('.log-error').hide(500);
+        }, 1000);
+      });
+    } else {
+      $('.log-error').hide();
+      $.ajax({
+        url: '/postComment',
+        type: "POST",
+        dataType: 'json',
+        contentType: "application/json",
+        data: JSON.stringify(data),
+        success: function (suc) {
+          if (suc.status === 200) {
+
+          } else {
+            $('.log-error').text('Failed to post comment');
+            $('.log-error').show(500, function () {
+              setTimeout(function () {
+                $('.log-error').hide(500);
+              }, 3000);
+            });
+          }
+        },
+        error: function (xhr) {
+          console.log(xhr)
+        }
+      });
+      $('#chatBody').val('');
     }
   });
 });

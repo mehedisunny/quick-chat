@@ -3,7 +3,17 @@ body {
     padding: 0px;
     outline: 0px;
 }
-
+textarea {
+    resize: none;
+}
+.chat-box {
+    height: 400px;
+    overflow-y: auto;
+    border: 1px solid #cccccc;
+    margin-top: 25px;
+    margin-bottom: 15px;
+    padding: 25px;
+}
 .login, .sign-up {
     margin-top: 75px;
 }
